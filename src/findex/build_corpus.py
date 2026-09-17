@@ -11,8 +11,8 @@ while True:
     except OverflowError:
         max_int = int(max_int / 10)
 
-RAW_DIR = Path("raw_data")
-OUTPUT_DIR = Path("data")
+RAW_DIR = Path("../../raw_data")
+OUTPUT_DIR = Path("../../data")
 OUTPUT_FILE = OUTPUT_DIR / "corpus.jsonl"
 
 CONTENT_FIELDS = ("content", "text", "article", "body", "article_content")
