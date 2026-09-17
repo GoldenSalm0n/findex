@@ -16,7 +16,7 @@ def test_empty_and_whitespace():
 
 
 def test_mixed_case_and_casefold():
-    """ß -> ss"""
+    """Casefold Check (example: ß -> ss)"""
     assert list(tokenize("Barça BARCELONA")) == ["barça", "barcelona"]
     assert list(tokenize("Fußball")) == ["fussball"]
 

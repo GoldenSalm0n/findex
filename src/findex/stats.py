@@ -6,8 +6,8 @@ from collections import Counter
 from pathlib import Path
 from typing import NamedTuple
 
-from findex.corpus import iter_documents
-from findex.tokenize import tokenize
+from findex.src.findex.corpus import iter_documents
+from findex.src.findex.tokenize import tokenize
 
 
 class CorpusStats(NamedTuple):
@@ -20,7 +20,7 @@ class CorpusStats(NamedTuple):
 
 
 def compute_stats(corpus_path: Path, limit: int | None = None) -> CorpusStats:
-    """Обчислює статистику корпусу в один прохід через лінивий конвеєр."""
+    """Calculates corpus statistics in a single pass."""
     tracemalloc.start()
     start_time = time.perf_counter()
 
@@ -55,23 +55,28 @@ def compute_stats(corpus_path: Path, limit: int | None = None) -> CorpusStats:
 
 
 def main() -> None:
+    default_corpus_path = Path(__file__).resolve().parents[2] / "data" / "corpus.jsonl"
+    default_limit = 500
+
     parser = argparse.ArgumentParser(
         description="Compute corpus statistics using a lazy streaming pipeline."
     )
     parser.add_argument(
         "corpus",
         type=Path,
+        nargs="?",
+        default=default_corpus_path,
         help="Path to a .jsonl file or directory containing the corpus.",
     )
     parser.add_argument(
         "--limit",
         type=int,
-        default=None,
-        help="Limit the number of processed documents (via islice).",
+        default=default_limit,
+        help="Limit the number of processed documents",
     )
     args = parser.parse_args()
 
-    print(f"Аналіз корпусу: {args.corpus} (limit={args.limit})...\n")
+    print(f"Corpus analysis: {args.corpus} (limit={args.limit})...\n")
     stats = compute_stats(args.corpus, limit=args.limit)
 
     print(f"Documents processed      : {stats.doc_count:,}")
