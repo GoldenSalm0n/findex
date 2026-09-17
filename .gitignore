@@ -1,0 +1,31 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# Cache & bytecode
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.benchmarks/
+
+# Data
+raw_data/
+data/*.jsonl
+data/*.csv
+*.csv
+
+# IDE configurations
+.idea/
+
+# System files
+Thumbs.db
+.DS_Store
